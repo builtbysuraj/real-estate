@@ -1,4 +1,4 @@
-import { Card, CardMedia, Grid, Typography } from "@mui/material"
+import { Box, Card, CardMedia, Grid, Typography } from "@mui/material"
 
 export default function SingleHouse({ data }) {
   return (
@@ -11,9 +11,25 @@ export default function SingleHouse({ data }) {
           image={data.img}
           alt={data.name}
         />
-        {data.popular ? <Typography>Popular</Typography> : null}
-        <Typography variant="h5">${data.price}/month</Typography>
-        <Typography variant="h5">{data.name}</Typography>
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            padding: "10px",
+          }}
+        >
+          <Box>
+            <Typography variant="h6">
+              ${data.price}
+              <Typography sx={{ fontSize: "16px" }} variant="span">
+                /month
+              </Typography>
+            </Typography>
+            <Typography sx={{ fontWeight: "bold" }}>{data.name}</Typography>
+          </Box>
+          {data.popular ? <Typography>Popular✨</Typography> : null}
+        </Box>
       </Card>
     </Grid>
   )
