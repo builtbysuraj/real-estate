@@ -4,12 +4,21 @@ import {
   Checkbox,
   FormControl,
   FormControlLabel,
+  InputLabel,
+  MenuItem,
+  Select,
   TextField,
 } from "@mui/material"
-import useFilter from "../hook/useFilter"
+import useHandler from "../hook/useHandler"
 
 export default function Filters() {
-  const { state, handleClear, handleInput, handlePopularCheck } = useFilter()
+  const {
+    state,
+    handleClear,
+    handleInput,
+    handlePopularCheck,
+    handlePriceRangeChange,
+  } = useHandler()
 
   return (
     <Box
@@ -18,14 +27,30 @@ export default function Filters() {
         flexDirection: "row",
         alignItems: "center",
         gap: "10px",
-        marginTop: "2rem"
+        marginTop: "2rem",
       }}
+      my={4}
     >
-      <TextField
-        type="text"
-        placeholder="Search name and location"
-        onChange={handleInput}
-      />
+      {/* Price Range */}
+      <FormControl sx={{ minWidth: 150 }}>
+        <InputLabel>Price range</InputLabel>
+        <Select value={state.priceRange} onChange={handlePriceRangeChange}>
+          <MenuItem value="">None</MenuItem>
+          <MenuItem value="1000-2000">1000 - 2000</MenuItem>
+          <MenuItem value="2000-4000">2000 - 4000</MenuItem>
+        </Select>
+      </FormControl>
+
+      {/* Search Filter */}
+      <FormControl fullWidth>
+        <TextField
+          type="text"
+          placeholder="Search name or location"
+          onChange={handleInput}
+        />
+      </FormControl>
+
+      {/* Toggle Popular */}
       <FormControl
         sx={{ display: "flex", flexDirection: "row", alignItems: "center" }}
       >
@@ -36,6 +61,8 @@ export default function Filters() {
           label="Only Popular"
         />
       </FormControl>
+      
+      {/* Clear Filter */}
       <Button onClick={handleClear}>Clear</Button>
     </Box>
   )

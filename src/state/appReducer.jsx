@@ -12,11 +12,17 @@ export const reducer = (state, action) => {
         ...state,
         popular: action.payload,
       }
+    case "SET_PRICE_RANGE":
+      return {
+        ...state,
+        priceRange: action.payload,
+      }
     case "CLEAR":
       return {
         data: data,
         searchQuery: "",
         popular: false,
+        priceRange: "",
       }
     default:
       return state

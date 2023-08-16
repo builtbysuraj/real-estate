@@ -8,6 +8,7 @@ const initialState = {
   data: data,
   searchQuery: "",
   popular: false,
+  priceRange: "",
 }
 
 export const AppContextProvider = ({ children }) => {

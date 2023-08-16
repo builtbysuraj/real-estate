@@ -1,20 +1,29 @@
 import { useContext } from "react"
 import { AppContext } from "../state/AppContext"
 
-export default function useFilter() {
-  const { state, dispatch } = useContext(AppContext)
+export function useFilter() {
+  const { state } = useContext(AppContext)
 
-  const handleInput = (e) => {
-    dispatch({ type: "SEARCH", payload: e.target.value })
-  }
+  const filteredData = state?.data?.filter((e) => {
+    // Toggle Popular button
+    if (state.popular && !e.popular) return false
 
-  const handlePopularCheck = (e) => {
-    dispatch({ type: "TOGGLE", payload: e.target.checked })
-  }
+    // Searching filter
+    if (
+      state.searchQuery &&
+      !e.name.toLowerCase().includes(state.searchQuery.toLowerCase()) &&
+      !e.location.toLowerCase().includes(state.searchQuery.toLowerCase())
+    )
+      return false
 
-  const handleClear = () => {
-    dispatch({ type: "CLEAR" })
-  }
+    // Price range
+    if (state.priceRange) {
+      const [minPrice, maxPrice] = state.priceRange.split("-").map(Number)
+      const price = Number(e.price.replace(/[^0-9.]/g, ""))
+      if (price < minPrice || price > maxPrice) return false
+    }
+    return true
+  })
 
-  return { state, handleClear, handleInput, handlePopularCheck }
+  return { filteredData }
 }
