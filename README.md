@@ -18,4 +18,4 @@ npm install
 ```bash
 npm run dev
 ```
-Congratulations sparkles, you have successfully started the development server!
+Congratulations ✨ you have successfully started the development server!
