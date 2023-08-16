@@ -27,6 +27,7 @@ export default function SingleHouse({ data }) {
               </Typography>
             </Typography>
             <Typography sx={{ fontWeight: "bold" }}>{data.name}</Typography>
+            <Typography variant="subtitle1">{data.location}</Typography>
           </Box>
           {data.popular ? <Typography>Popular✨</Typography> : null}
         </Box>

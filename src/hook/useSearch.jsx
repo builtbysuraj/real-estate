@@ -1,11 +1,18 @@
-import { useAppState } from "../state/AppContext"
+import { useContext } from "react"
+import { AppContext } from "../state/AppContext"
 
-export default function useSearch() {
-  const { state } = useAppState()
+export function useSearchFilter() {
+  const { state } = useContext(AppContext)
 
-  const filteredData = state.data.filter((data) => {
-    data.name.toLowerCase().includes(state.searchQuery.toLowerCase()) ||
-      data.location.toLowerCase().includes(state.searchQuery.toLowerCase())
+  const filteredData = state?.data?.filter((e) => {
+    if (state.popular && !e.popular) return false
+    if (
+      state.searchQuery &&
+      !e.name.toLowerCase().includes(state.searchQuery.toLowerCase()) &&
+      !e.location.toLowerCase().includes(state.searchQuery.toLowerCase())
+    )
+      return false
+    return true
   })
 
   return { filteredData }

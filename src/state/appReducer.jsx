@@ -1,4 +1,4 @@
-import { data } from "../db/data.js"
+import { data } from "../db/data"
 
 export const reducer = (state, action) => {
   switch (action.type) {
@@ -6,12 +6,18 @@ export const reducer = (state, action) => {
       return {
         ...state,
         searchQuery: action.payload,
-        filteredData: data.filter((e) =>
-          e.name.toLowerCase().includes(action.payload.toLowerCase())
-        ),
       }
-    // case "TOGGLE_POPULAR":
-    //   return { ...state, popular: action.payload }
+    case "TOGGLE":
+      return {
+        ...state,
+        popular: action.payload,
+      }
+    case "CLEAR":
+      return {
+        data: data,
+        searchQuery: "",
+        popular: false,
+      }
     default:
       return state
   }

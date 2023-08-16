@@ -5,7 +5,7 @@ import { reducer } from "./appReducer"
 export const AppContext = createContext()
 
 const initialState = {
-  filteredData: data,
+  data: data,
   searchQuery: "",
   popular: false,
 }
