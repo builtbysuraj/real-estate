@@ -14,7 +14,7 @@ cd real-estate
 ```bash
 npm install
 ```
-5. Start the development server using the following command:
+4. Start the development server using the following command:
 ```bash
 npm run dev
 ```
