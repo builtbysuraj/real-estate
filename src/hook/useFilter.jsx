@@ -18,8 +18,11 @@ export function useFilter() {
 
     // Price range
     if (state.priceRange) {
-      const [minPrice, maxPrice] = state.priceRange.split("-").map(Number)
-      const price = Number(e.price.replace(/[^0-9.]/g, ""))
+      // Split the state.priceRange string into an array of two elements
+      const priceRangeArray = state.priceRange.split("-")
+      const minPrice = Number(priceRangeArray[0])
+      const maxPrice = Number(priceRangeArray[1])
+      const price = e.price
       if (price < minPrice || price > maxPrice) return false
     }
     return true
